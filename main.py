@@ -1,11 +1,16 @@
 from classes.Classes import Estudante
 from components.Funcoes import *
 from Dados import *
+import os
+
+clear = lambda: os.system("cls")
 
 if __name__ == '__main__':
 
     opcoesDoPrograma()
     escolha = int(input("Opção: "))
+
+    clear()
 
     est = Estudante("", 0, 0, "", "", "", "")
 
@@ -59,17 +64,21 @@ if __name__ == '__main__':
             est.setSala(sala)
             est.setSexo(sexo)
             est.setDataDeAniversario(dataDeAniversario)
+        
+        clear()
 
-            mostrarInformacoes(est.getName(), est.getIdade(), est.getRa(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario())
+            # mostrarInformacoes(est.getName(), est.getIdade(), est.getRa(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario())
     elif escolha == 2:
 
         ra_select = input("Insira o ra para buscar: ")
 
         for i in estudantes['ra']:
-            if ra_select == i:
-                print("Estudante encontrado!")
+            if int(ra_select) == i:
+                ind = int(estudantes['ra'].index(i))
+
+                clear()
                 
-                ind = estudantes['ra'].index(i)
+                mostrarDados(ind, estudantes)
 
                 break
         
