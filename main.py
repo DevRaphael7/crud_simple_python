@@ -1,18 +1,13 @@
 from classes.Classes import Estudante
 from components.Funcoes import *
-
-def opcoesDoPrograma():
-    print('1) Cadastrar estudante')
-    print('2) Buscar estudante')
-    print('3) Atualizar estudante')
-    print('4) Deletar estudante')
+from Dados import *
 
 if __name__ == '__main__':
 
     opcoesDoPrograma()
     escolha = int(input("Opção: "))
 
-    est = Estudante("", 0, 0, "", "")
+    est = Estudante("", 0, 0, "", "", "", "")
 
     # Variáveis do programa
     nome  = ""
@@ -31,6 +26,10 @@ if __name__ == '__main__':
         print("(1)Manhã\t(2)Tarde\t(3)Noite")
         escolha_periodo = int(input("Escolha um período: "))
 
+        dataDeAniversario = input("Data de aniversário no formato dd/mm/yyyy: ")
+
+        sexo = input("Seu sexo(M) ou (F): ")
+
         if escolha_periodo == 1:
             periodo = "Manhã"
         elif periodo == 2:
@@ -43,15 +42,36 @@ if __name__ == '__main__':
         ra = sortearRA()
 
         print("(1)Sala 01\t(2)Sala 02\t(3)Sala 03")
-        sala = input("Escolha uma das salas: ")
+        escolha_sala = int(input("Escolha uma das salas: "))
 
+        if escolha_sala == 1:
+            sala = "Sala 01"
+        elif escolha_sala == 2:
+            sala = "Sala 02"
+        elif escolha_sala == 3:
+            sala = "Sala 03"
 
-    
-        if (len(str(ra)) == 5 and nome != "" and sala != ""):
+        if (len(str(ra)) == 5 and nome != "" and sala != "" and sexo in ['M', 'F']):
             est.setName(nome)
             est.setIdade(idade)
             est.setRa(ra)
             est.setPeriodo(periodo)
             est.setSala(sala)
+            est.setSexo(sexo)
+            est.setDataDeAniversario(dataDeAniversario)
 
-            mostrarInformacoes(est.getName(), est.getIdade(), est.getRa(), est.getPeriodo(), est.getSala())
+            mostrarInformacoes(est.getName(), est.getIdade(), est.getRa(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario())
+    elif escolha == 2:
+
+        ra_select = input("Insira o ra para buscar: ")
+
+        for i in estudantes['ra']:
+            if ra_select == i:
+                print("Estudante encontrado!")
+                
+                ind = estudantes['ra'].index(i)
+
+                break
+        
+
+        

@@ -1,13 +1,15 @@
 class Pessoa:
-    def __init__(self, name : str, idade : int):
+    def __init__(self, name : str, idade : int, sexo : str, dataDeAniversario : str):
         self.name = name 
         self.idade = idade
+        self.sexo = sexo
+        self.dataDeAniversario = dataDeAniversario
 
     def getName(self):
         return self.name
     
     def setName(self, nome : str):
-        if not(self.name == ""):
+        if not(nome == ""):
             self.name = nome
     
     def getIdade(self):
@@ -16,11 +18,28 @@ class Pessoa:
     def setIdade(self, idade : int):
         if idade > 0:
             self.idade = idade
+    
+    def getSexo(self):
+        return self.sexo
+    
+    def setSexo(self, sexo : str):
+        if sexo in ['M', 'F']:
+            self.sexo = sexo
+
+    def getDataDeAniversario(self):
+        return self.dataDeAniversario
+    
+    def setDataDeAniversario(self, dataDeAniversario : str):
+        self.dataDeAniversario = dataDeAniversario
+    
+    def mostrarSexo(self):
+        sex = 'Masculino' if self.sexo == 'M' else 'Feminino'
+        return sex
 
 class Estudante(Pessoa):
 
-    def __init__(self, name : str, idade : int, ra : int, periodo : str, sala : str):
-        super().__init__(name, idade)
+    def __init__(self, name : str, idade : int, ra : int, periodo : str, sala : str, sexo : str , dataDeAniversario : str):
+        super().__init__(name, idade, sexo, dataDeAniversario)
         self.ra = ra
         self.periodo = periodo
         self.sala = sala
