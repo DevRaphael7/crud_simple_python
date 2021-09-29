@@ -66,3 +66,12 @@ class Estudante(Pessoa):
     
     def setSala(self, sala : str):
         self.sala = sala
+
+    def deletarEstudante(self, dicionario : dict, ra : int):
+
+        ind = dicionario['ra'].index(ra)
+
+        for i in dicionario.keys():
+            lista_deletar = dicionario[i]
+            lista_deletar.pop(ind)
+            dicionario[i] = lista_deletar

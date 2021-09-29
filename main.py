@@ -22,8 +22,9 @@ if __name__ == '__main__':
     sala = ""
     sexo = ""
     dataDeAniversario = ""
+    chave = ""
 
-    while(escolha in [1, 2, 3, 4, 5, 6]):
+    while(escolha != 7):
         if escolha == 1:
 
             nome = input("Digite o seu nome: ")
@@ -45,7 +46,7 @@ if __name__ == '__main__':
             else:
                 print("Valor inválido!")
             
-            ra = sortearRA()
+            ra = sortearRA(estudantes['ra'])
 
             print("(1)Sala 01\t(2)Sala 02\t(3)Sala 03")
             escolha_sala = int(input("Escolha uma das salas: "))
@@ -66,15 +67,13 @@ if __name__ == '__main__':
                 est.setSexo(sexo)
                 est.setDataDeAniversario(dataDeAniversario)
 
-                adicionarNovoEstudante(estudantes, est.getName(), est.getRa(), est.getIdade(), est.getPeriodo(), est.getSala(), est.getSexo(), est.getDataDeAniversario())
+                adicionarNovoEstudante(estudantes, est.getName(), est.getRa(), est.getIdade(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario())
             
             clear()
 
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
 
-
-                # mostrarInformacoes(est.getName(), est.getIdade(), est.getRa(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario())
         elif escolha == 2:
 
             ra_select = input("Insira o ra para buscar: ")
@@ -98,6 +97,94 @@ if __name__ == '__main__':
             print("\n")
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
-                
-
         
+        elif escolha == 4:
+
+            update_periodo = ''
+            update_sala = ''
+
+            clear()
+            escolhaUpdate = int(input("O que deseja atualizar? (1) Periodo | (2) Sala:\n"))
+            escolhaAluno = int(input("Insira o ra do aluno: "))
+
+            if escolhaUpdate == 1:
+                index = estudantes['ra'].index(escolhaAluno)
+                update_periodo = input(f"Insira o update para {estudantes['nome'][index]}: ")
+                chave = "periodo"
+            elif escolhaUpdate == 2:
+                index = estudantes['ra'].index(escolhaAluno)
+                update_sala = input(f"Insira o update para {estudantes['nome'][index]}: ")
+                chave = "sala"
+
+            if update_periodo in ['Manhã', 'Tarde', 'Noite']:
+                updateDados(escolhaAluno, estudantes, update_periodo, chave)
+            elif update_sala in ['Sala 01', 'Sala 02', 'Sala 03']:
+                updateDados(escolhaAluno, estudantes, update_sala, chave)
+
+            print("\n")
+            opcoesDoPrograma()
+            escolha = int(input("Opção: "))
+        elif escolha == 5:
+
+            escolha_opcao = int(input("Escolha uma opção sobre as notas: (1) Ver notas || (2) Alterar notas || (3) Ver média de alunos\n"))
+
+            if escolha_opcao == 1:
+
+                verNotas(estudantes)
+            
+            elif escolha_opcao == 2:
+
+                escolha_ra = int(input("Insira o RA do aluno que deseja alterar a nota: "))
+
+                if escolha_ra in estudantes['ra']:
+                    new_nota_av1 = int(input("Nota AV1: "))
+                    new_nota_av2 = int(input("Nota AV2: "))
+
+                    if new_nota_av1 >= 10.0 and new_nota_av2 >= 10.0:
+                        updateNotas(estudantes, escolha_ra, new_nota_av1, new_nota_av2)
+                    else:
+                        print("Notas inválida")
+
+                else:
+                    print("RA não encontrado!")
+            
+            elif escolha_opcao == 3:
+
+                escolha_ra = int(input("Insira o RA do aluno que deseja ver a média: "))
+                
+                if escolha_ra in estudantes['ra']:
+
+                    ind = estudantes['ra'].index(escolha_ra)
+
+                    av1_nota = estudantes['AV1'][ind]
+                    av2_nota = estudantes['AV2'][ind]
+
+                    media = ( av1_nota + av2_nota ) / 2
+
+                    print(f"RA: {estudantes['ra'][ind]}")
+                    print(f"Nome: {estudantes['nome'][ind]}")
+                    print(f"Média: {media}")
+                
+                print("\n")
+                opcoesDoPrograma()
+                escolha = int(input("Opção: "))
+
+        elif escolha == 6:
+
+            clear()
+
+            ra = int(input("Digite o RA do estudante que você quer deletar: "))
+            
+            if ra in estudantes['ra']:
+                est.deletarEstudante(estudantes, ra)
+                print("Operação realizada com sucesso!")
+            else:
+                print("RA não encontrado!")
+            
+            print("\n")
+            opcoesDoPrograma()
+            escolha = int(input("Opção: "))
+
+        elif escolha == 7:
+
+            break
