@@ -115,19 +115,17 @@ if __name__ == '__main__':
             escolhaAluno = int(input("Insira o ra do aluno: "))
             index = estudantes['ra'].index(escolhaAluno)
 
-            if escolhaUpdate == 1 and (escolhaAluno in estudantes['ra']):
-                update_periodo = input(f"Insira o update para {estudantes['nome'][index]}: ")
-                chave = "periodo"
-            elif escolhaUpdate == 2 and (escolhaAluno in estudantes['ra']):
-                update_sala = input(f"Insira o update para {estudantes['nome'][index]}: ")
-                chave = "sala"
+            if escolhaUpdate == 1:
 
-            if update_periodo in ['Manhã', 'Tarde', 'Noite']:
-                est.updateDados(escolhaAluno, estudantes, update_periodo, chave)
-            elif update_sala in ['Sala 01', 'Sala 02', 'Sala 03']:
-                est.updateDados(escolhaAluno, estudantes, update_sala, chave)
-            else:
-                print("Ocorreu um erro na inserção dos dados\n---")
+                update_periodo = input(f"Insira o update para {estudantes['nome'][index]}: ")
+                est.setPeriodo(update_periodo)
+                est.updatePeriodo(escolhaAluno, estudantes, update_periodo, "periodo")
+
+            elif escolhaUpdate == 2:
+
+                update_sala = input(f"Insira o update para {estudantes['nome'][index]}: ")
+                est.setSala(update_sala)
+                est.updatePeriodo(escolhaAluno, estudantes, update_periodo, "sala")
 
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
@@ -176,6 +174,6 @@ if __name__ == '__main__':
             print("\n")
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
-            
+
         elif escolha == 7:
             break

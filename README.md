@@ -1,5 +1,10 @@
-from random import randint
+# Crud simples com Python
 
+Neste repositório crio um crud simples para *Inserir*,*Buscar*, *Atualizar* e *Deletar* estudantes sem uso de baco de dados, utilizando uma estrutura de dados semi-estruturado como os `dicionários` do Python.
+
+Para fazer o CRUD usei Orientação a Objetos, onde temos a classe abstrata `Pessoa` e a classe `Estudante` que herda os atributos e métodos da classe Pessoa.
+
+``` python
 class Pessoa:
     def __init__(self, name : str, idade : int, sexo : str, dataDeAniversario : str):
         self.name = name 
@@ -173,3 +178,5 @@ class Estudante(Pessoa):
             lista_deletar = dicionario[i]
             lista_deletar.pop(ind)
             dicionario[i] = lista_deletar
+
+```
