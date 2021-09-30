@@ -38,7 +38,12 @@ class Pessoa:
     
     def setDataDeAniversario(self, dataDeAniversario : str):
         self.dataDeAniversario = dataDeAniversario
-    
+            
+    def validarDataDeNascimento(self):
+        if int(self.dataDeAniversario.split("/")[0]) > 31 or int(self.dataDeAniversario.split("/")[1]) > 12:
+            return False
+        return True
+        
     def mostrarSexo(self):
         sex = 'Masculino' if self.sexo == 'M' else 'Feminino'
         return sex
@@ -149,4 +154,5 @@ class Estudante(Pessoa):
             lista_deletar = dicionario[i]
             lista_deletar.pop(ind)
             dicionario[i] = lista_deletar
+
 ```
