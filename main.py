@@ -37,6 +37,7 @@ if __name__ == '__main__':
             escolha_periodo = int(input("Escolha um período: "))
 
             dataDeAniversario = input("Data de aniversário no formato dd/mm/yyyy: ")
+            est.setDataDeAniversario(dataDeAniversario)
 
             sexo = input("Seu sexo(M) ou (F): ")
 
@@ -63,7 +64,7 @@ if __name__ == '__main__':
             av1 = float(input("AV1 do aluno: "))
             av2 = float(input("AV2 do aluno: "))
 
-            if (len(str(ra)) == 5 and nome != "" and sala != "" and sexo in ['M', 'F']):
+            if (len(str(ra)) == 5 and nome != "" and sala != "" and sexo in ['M', 'F'] and est.validarDataDeNascimento()):
                 est.setName(nome)
                 est.setIdade(idade)
                 est.setRa(ra)
@@ -72,7 +73,6 @@ if __name__ == '__main__':
                 est.setSexo(sexo)
                 est.setAv1(av1)
                 est.setAv2(av2)
-                est.setDataDeAniversario(dataDeAniversario)
 
                 adicionarNovoEstudante(estudantes, est)
             
