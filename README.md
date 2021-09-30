@@ -61,7 +61,7 @@ class Estudante(Pessoa):
         if len(a) >= 5:
             self.ra = ra
         else:
-            self.ra = 0
+            print("---\nRA DEVE SER PELO MENOS MAIOR QUE 5\n---")
     
     def getPeriodo(self):
         return self.periodo
@@ -89,32 +89,12 @@ class Estudante(Pessoa):
     def getAv2(self):
         return self.av2
 
-    def adicionarNovoEstudante(self, dicionario : dict, nome : str, ra : int, idade : int, periodo : str, sala : str, sexo : str, nascimento : str, av1 : int, av2 : int):
-        ind = 0
-        lista_dados = [ra, nome, idade, periodo, sala, sexo, nascimento, av1, av2]
-        for i in dicionario:
-            lista_add = dicionario[i]
-            lista_add.append(lista_dados[ind])
-            dicionario[i] = lista_add
-            ind += 1
-
     def sortearRA(self, ras : list, random : randint):
         ra = random.randint(11111, 99999)
         while ra in ras:
             ra = random.randint(11111, 99999)
 
         return ra
-
-    def mostrarDados(self, indice : int, dicionario : dict):
-        print("=================================================")
-        print(f"Nome: {dicionario['nome'][indice]}")
-        print(f"RA: {dicionario['ra'][indice]}")
-        print(f"Idade: {dicionario['idade'][indice]}")
-        print(f"Periodo: {dicionario['periodo'][indice]}")
-        print(f"Sala: {dicionario['sala'][indice]}")
-        print(f"Sexo: {dicionario['sexo'][indice]}")
-        print(f"Data de Nascimento: {dicionario['nascimento'][indice]}")
-        print("=================================================")
     
     def updateDados(self, ra : int, dicionario : dict, periodo : str, chave:str):
     
@@ -123,15 +103,6 @@ class Estudante(Pessoa):
         lista_up = dicionario[chave]
         lista_up.insert(index, periodo)
         dicionario[chave] = lista_up
-    
-    def updatePeriodo(self, escolhaAluno : int, dicionario : dict, update_periodo : str, chave : str):
-
-        if self.getPeriodo() in ['Manhã', 'Tarde', 'Noite']:
-            self.updateDados(escolhaAluno, dicionario, update_periodo, chave)
-        elif self.getSala() in ['Sala 01', 'Sala 02', 'Sala 03']:
-            self.updateDados(escolhaAluno, dicionario, update_periodo, chave)
-        else:
-            print("Opção inválida!\n---")
     
     def verNotas(self, dicionario : dict, i : int):
 
@@ -178,5 +149,4 @@ class Estudante(Pessoa):
             lista_deletar = dicionario[i]
             lista_deletar.pop(ind)
             dicionario[i] = lista_deletar
-
 ```

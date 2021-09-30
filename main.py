@@ -74,7 +74,7 @@ if __name__ == '__main__':
                 est.setAv2(av2)
                 est.setDataDeAniversario(dataDeAniversario)
 
-                est.adicionarNovoEstudante(estudantes, est.getName(), est.getRa(), est.getIdade(), est.getPeriodo(), est.getSala(), est.mostrarSexo(), est.getDataDeAniversario(), est.getAv1(), est.getAv2())
+                adicionarNovoEstudante(estudantes, est)
             
             clear()
             opcoesDoPrograma()
@@ -82,16 +82,14 @@ if __name__ == '__main__':
 
         elif escolha == 2:
 
-            ra_select = input("Insira o ra para buscar: ")
+            est.setRa(input("Insira o ra para buscar: "))
             
-            for i in estudantes['ra']:
-                if int(ra_select) == i:
-                    ind = int(estudantes['ra'].index(i))
-                    clear()
-                    est.mostrarDados(ind, estudantes)
-                    break
-            else:
-                print("Estudante não encontrado!\n")
+            
+            if int(est.getRa()) in estudantes['ra']:
+                ind = int(estudantes['ra'].index(int(est.getRa())))
+                clear()
+                mostrarDados(ind, estudantes)
+            
             
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
@@ -100,16 +98,13 @@ if __name__ == '__main__':
 
             for ra in estudantes['ra']:
                 ind = estudantes['ra'].index(ra)
-                est.mostrarDados(ind, estudantes)
+                mostrarDados(ind, estudantes)
             
             print("\n")
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
         
         elif escolha == 4:
-            update_periodo = ''
-            update_sala = ''
-
             clear()
             escolhaUpdate = int(input("O que deseja atualizar? (1) Periodo | (2) Sala:\n"))
             escolhaAluno = int(input("Insira o ra do aluno: "))
@@ -117,15 +112,13 @@ if __name__ == '__main__':
 
             if escolhaUpdate == 1:
 
-                update_periodo = input(f"Insira o update para {estudantes['nome'][index]}: ")
-                est.setPeriodo(update_periodo)
-                est.updatePeriodo(escolhaAluno, estudantes, update_periodo, "periodo")
+                est.setPeriodo(input(f"Insira o update para {estudantes['nome'][index]}: "))
+                updatePeriodoOuSala(est, escolhaAluno, estudantes, est.getPeriodo(), "periodo")
 
             elif escolhaUpdate == 2:
 
-                update_sala = input(f"Insira o update para {estudantes['nome'][index]}: ")
-                est.setSala(update_sala)
-                est.updatePeriodo(escolhaAluno, estudantes, update_periodo, "sala")
+                est.setSala(input(f"Insira o update para {estudantes['nome'][index]}: "))
+                updatePeriodoOuSala(est, escolhaAluno, estudantes, est.getSala(), "sala")
 
             opcoesDoPrograma()
             escolha = int(input("Opção: "))
